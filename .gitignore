@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# mypy
+.mypy_cache/
+
+# Pyre type checker
+.pyre/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Docker
+*.env
+docker-compose.override.yml
+**/Dockerfile.*
+
+# Logs
+*.log
+
+# Data / uploads
+/data/
+*.sqlite
+*.db
+
+# Ollama / models
+~/.ollama/models/
+*.llm
+*.ckpt
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Ignore environment variable file
+.env
+
+# Ignore alembic / migrations folder (if you don’t want to commit migration scripts)
+alembic/
+# or if your migrations are in a subfolder, e.g. “migrations/”
+migrations/
+# or specific Alembic config file
+alembic.ini
