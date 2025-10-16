@@ -123,10 +123,8 @@ curl -X POST "http://localhost:8000/query" \
 
 ## 🔹 License
 
-MIT License © 2025 Your Name
+MIT License © 2025 Gowtham
 
 ---
 
-If you want, I can also make a **more **“GitHub-ready” README with badges**, Docker build instructions, and a **diagram showing the architecture** of FastAPI → Qdrant → Ollama/OpenAI → Client.
 
-Do you want me to do that next?
