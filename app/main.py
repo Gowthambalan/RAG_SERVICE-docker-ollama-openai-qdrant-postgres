@@ -58,12 +58,12 @@ def ingest_file(
     """
     Upload a PDF file and ingest it into Qdrant using the client's embedding model.
     """
-    # 1️⃣ Get client info from DB
+    # 1️ Get client info from DB
     client = get_client(db, client_id)
     if not client:
         raise HTTPException(status_code=404, detail="Client not found")
 
-    # 2️⃣ Save uploaded file temporarily
+    # 2️ Save uploaded file temporarily
     file_location = f"/tmp/{file.filename}"
     try:
         with open(file_location, "wb") as f:
@@ -71,7 +71,7 @@ def ingest_file(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save uploaded file: {str(e)}")
 
-    # 3️⃣ Call ingest_document with the corrected Qdrant API
+    # 3️ Call ingest_document with the corrected Qdrant API
     try:
         result = ingest_document(
             client_id=client.client_id,
