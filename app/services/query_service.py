@@ -25,7 +25,7 @@ def query_document(client_id: str, query: str, embedding_model_name: str, llm_mo
         collection_name = f"{client_id}_{embedding_model_name.replace('/', '_')}"
         logger.info(f"Querying collection: {collection_name}")
 
-        # 1️⃣ Check if collection exists
+        # 1️ Check if collection exists
         try:
             collections = qdrant_client.get_collections()
             collection_names = [c.name for c in collections.collections]
@@ -34,28 +34,28 @@ def query_document(client_id: str, query: str, embedding_model_name: str, llm_mo
         except Exception as e:
             raise ValueError(f"Error accessing Qdrant collections: {str(e)}")
 
-        # 2️⃣ Load embedding and LLM models
+        # 2️ Load embedding and LLM models
         embedding_model = get_embedding_model(embedding_model_name)
         llm_model = get_llm_model(llm_model_name)
 
-        # 3️⃣ Initialize vectorstore with Qdrant
+        # 3️ Initialize vectorstore with Qdrant
         vectorstore = Qdrant(
             client=qdrant_client,
             collection_name=collection_name,
             embeddings=embedding_model
         )
 
-        # 4️⃣ Create RetrievalQA chain
+        # 4️ Create RetrievalQA chain
         qa_chain = RetrievalQA.from_chain_type(
             llm=llm_model,
             chain_type="stuff",
             retriever=vectorstore.as_retriever(search_kwargs={"k": 3})
         )
 
-        # 5️⃣ Run query
+        # 5️ Run query
         answer = qa_chain.run(query)
 
-        # 6️⃣ Return structured result
+        # 6️ Return structured result
         return {
             "answer": answer,
             "model_used": {
