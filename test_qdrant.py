@@ -11,10 +11,10 @@ def test_qdrant():
             https=settings.QDRANT_HTTPS
         )
         collections = client.get_collections()
-        print("✅ Qdrant connection successful")
+        print(" Qdrant connection successful")
         print("Available collections:", [c.name for c in collections.collections])
     except Exception as e:
-        print(f"❌ Qdrant connection failed: {e}")
+        print(f" Qdrant connection failed: {e}")
 
 if __name__ == "__main__":
     test_qdrant()
