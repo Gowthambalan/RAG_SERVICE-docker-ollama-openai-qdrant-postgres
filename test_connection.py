@@ -22,12 +22,12 @@ def test_ollama_connection():
         )
         print(f"Model test: {response.status_code}")
         if response.status_code == 200:
-            print("✅ Model is working!")
+            print(" Model is working!")
         else:
-            print(f"❌ Model error: {response.text}")
+            print(f" Model error: {response.text}")
             
     except Exception as e:
-        print(f"❌ Connection failed: {e}")
+        print(f" Connection failed: {e}")
 
 if __name__ == "__main__":
     test_ollama_connection()
