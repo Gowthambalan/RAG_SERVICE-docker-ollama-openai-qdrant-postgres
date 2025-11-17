@@ -19,28 +19,28 @@ def ingest_document(client_id: str, document_id: str, file_path: str, embedding_
     """
     Ingest a PDF document: extract text, create embeddings, and store in Qdrant.
     """
-    # 1️⃣ Extract text from PDF
+    # 1️ Extract text from PDF
     text = extract_text_from_pdf(file_path)
     if not text.strip():
         raise ValueError(f"No text extracted from file '{file_path}'")
 
-    # 2️⃣ Get embedding model
+    # 2️ Get embedding model
     embedding_model = get_embedding_model(embedding_model_name)
 
-    # 3️⃣ Split text into chunks
+    # 3️ Split text into chunks
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = splitter.split_text(text)
     if not chunks:
         raise ValueError(f"No text chunks generated from '{file_path}'")
 
-    # 4️⃣ Determine collection name
+    # 4️ Determine collection name
     collection_name = f"{client_id}_{embedding_model_name.replace('/', '_')}"
 
-    # 5️⃣ Determine embedding vector size
+    # 5️ Determine embedding vector size
     test_vector = embedding_model.embed_query("test")
     vector_size = len(test_vector)
 
-    # 6️⃣ Create collection if it doesn't exist
+    # 6️ Create collection if it doesn't exist
     existing_collections = [c.name for c in qdrant_client.get_collections().collections]
     if collection_name not in existing_collections:
         qdrant_client.create_collection(
@@ -48,11 +48,11 @@ def ingest_document(client_id: str, document_id: str, file_path: str, embedding_
             vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE)
         )
 
-    # 7️⃣ Store chunks in Qdrant - CORRECTED
+    # 7️ Store chunks in Qdrant - CORRECTED
     store = Qdrant(
         client=qdrant_client,
         collection_name=collection_name,
-        embeddings=embedding_model  # ✅ Fixed parameter name
+        embeddings=embedding_model  #  Fixed parameter name
     )
     
     store.add_texts(
@@ -60,7 +60,7 @@ def ingest_document(client_id: str, document_id: str, file_path: str, embedding_
         metadatas=[{"document_id": document_id, "chunk_id": i} for i in range(len(chunks))]
     )
 
-    # 8️⃣ Return summary
+    # 8️ Return summary
     return {
         "status": "success",
         "document_id": document_id,
